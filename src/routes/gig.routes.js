@@ -5,17 +5,11 @@ import Gig from "../models/Gig.js";
 
 const router = express.Router();
 
-/* 🔥 MUST COME FIRST */
 router.get("/my", protect, async (req, res) => {
-  try {
-    const gigs = await Gig.find({ ownerId: req.user.id })
-      .populate('ownerId', 'name email')
-      .sort({ createdAt: -1 });
-    res.json(gigs);
-  } catch {
-    res.status(500).json({ message: "Server error" });
-  }
+  const gigs = await Gig.find({ ownerId: req.user.id }).sort({ createdAt: -1 });
+  res.json(gigs);
 });
+
 
 router.get("/", getGigs);
 router.post("/", protect, createGig);
