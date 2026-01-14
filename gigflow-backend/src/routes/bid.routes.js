@@ -13,5 +13,4 @@ router.post("/", protect, createBid);
 router.get("/received", protect, getReceivedBids); // ✅ USE CONTROLLER
 router.get("/:gigId", protect, getBidsForGig);
 router.patch("/:bidId/hire", protect, hireBid);
-
 export default router;
